@@ -1,22 +1,22 @@
 <div id="<%= dom_id match %>">
   <p>
     <strong>Home team:</strong>
-    <%= match.home_team_id %>
+    <%= match.home_team.name %>
   </p>
 
   <p>
     <strong>Away team:</strong>
-    <%= match.away_team_id %>
+    <%= match.away_team.name %>
   </p>
 
   <p>
     <strong>Start time:</strong>
-    <%= match.start_time %>
+    <%= match.start_time.strftime("%I:%M %p") %>
   </p>
 
   <p>
     <strong>League:</strong>
-    <%= match.league_id %>
+    <%= match.league.name %>
   </p>
 
 </div>
