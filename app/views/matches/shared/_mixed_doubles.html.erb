@@ -1,0 +1,16 @@
+<%= form_with(model: @match, url: mixed_doubles_matches_path, method: :post) do |f| %>
+  <!-- Other form fields here -->
+  <div class="field">
+    <%= f.label :mixed_doubles_set1_score %>
+    <%= f.number_field :mixed_doubles_set1_score %>
+  </div>
+  <div class="field">
+    <%= f.label :mixed_doubles_set2_score %>
+    <%= f.number_field :mixed_doubles_set2_score %>
+  </div>
+  <div class="field">
+    <%= f.label :mixed_doubles_set3_score %>
+    <%= f.number_field :mixed_doubles_set3_score %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>

@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_181805) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_185322) do
+  create_table "individual_matches", force: :cascade do |t|
+    t.string "category"
+    t.integer "winner"
+    t.integer "loser"
+    t.integer "sets"
+    t.integer "match_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_individual_matches_on_match_id"
+  end
+
   create_table "leagues", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -24,6 +35,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_181805) do
     t.integer "league_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "home_team_score"
+    t.integer "away_team_score"
+    t.string "match_type"
     t.index ["away_team_id"], name: "index_matches_on_away_team_id"
     t.index ["home_team_id"], name: "index_matches_on_home_team_id"
     t.index ["league_id"], name: "index_matches_on_league_id"
@@ -72,7 +86,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_181805) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "matches", "away_team"
-  add_foreign_key "matches", "home_team"
-  add_foreign_key "matches", "leagues"
+  add_foreign_key "individual_matches", "matches"
 end

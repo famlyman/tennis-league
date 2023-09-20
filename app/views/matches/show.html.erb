@@ -8,3 +8,20 @@
 
   <%= button_to "Destroy this match", @match, method: :delete %>
 </div>
+
+<h1>Match Details</h1>
+<p>Team One Score: <%= @match.home_team_score %></p>
+<p>Team Two Score: <%= @match.away_team_score %></p>
+
+<% case @match.match_type %>
+  <% when 'mens_doubles' %>
+    <%= render 'matches/shared/mens_doubles', match: @match %>
+  <% when 'womens_doubles' %>
+    <%= render 'matches/shared/womens_doubles', match: @match %>
+  <% when 'mixed_doubles' %>
+    <%= render 'matches/shared/mixed_doubles', match: @match %>
+  <% when 'mens_singles' %>
+    <%= render 'matches/shared/mens_singles', match: @match %>
+  <% when 'womens_singles' %>
+    <%= render 'matches/shared/womens_singles', match: @match %>
+<% end %>

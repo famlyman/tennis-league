@@ -1,0 +1,16 @@
+<%= form_with(model: @match, url: womens_singles_matches_path, method: :post) do |f| %>
+  <!-- Other form fields here -->
+  <div class="field">
+    <%= f.label :womens_singles_set1_score %>
+    <%= f.number_field :womens_singles_set1_score %>
+  </div>
+  <div class="field">
+    <%= f.label :womens_singles_set2_score %>
+    <%= f.number_field :womens_singles_set2_score %>
+  </div>
+  <div class="field">
+    <%= f.label :womens_singles_set3_score %>
+    <%= f.number_field :womens_singles_set3_score %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>

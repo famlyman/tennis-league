@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :matches
+  resources :matches do
+    collection do
+      post :mens_doubles
+      post :womens_doubles
+      post :mixed_doubles
+      post :mens_singles
+      post :womens_singles
+    end
+  end
   resources :leagues
   resources :seasons
   resources :teams

@@ -1,0 +1,33 @@
+<%= form_with(model: @match, url: mens_doubles_matches_path, method: :post) do |f| %>
+  <div class="field">
+    <%= f.label :home_mens_doubles_set1_score, 'Home Set 1 Score' %>
+    <%= f.number_field :home_mens_doubles_set1_score %>
+  </div>
+  <div class="field">
+    <%= f.label :away_mens_doubles_set1_score, 'Away Set 1 Score' %>
+    <%= f.number_field :away_mens_doubles_set1_score %>
+  </div>
+
+  <div class="field">
+    <%= f.label :home_mens_doubles_set2_score, 'Home Set 2 Score' %>
+    <%= f.number_field :home_mens_doubles_set2_score %>
+  </div>
+  <div class="field">
+    <%= f.label :away_mens_doubles_set2_score, 'Away Set 2 Score' %>
+    <%= f.number_field :away_mens_doubles_set2_score %>
+  </div>
+
+  <div class="field">
+    <%= f.label :home_mens_doubles_set3_score, 'Home Set 3 Score' %>
+    <%= f.number_field :home_mens_doubles_set3_score %>
+  </div>
+  <div class="field">
+    <%= f.label :away_mens_doubles_set3_score, 'Away Set 3 Score' %>
+    <%= f.number_field :away_mens_doubles_set3_score %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Submit Scores' %>
+  </div>
+<% end %>
+
