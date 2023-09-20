@@ -4,4 +4,5 @@ class Match < ApplicationRecord
   belongs_to :league
   has_many :match_seasons
   has_many :seasons, through: :match_seasons
+  
 end
