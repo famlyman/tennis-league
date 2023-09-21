@@ -1,1 +1,6 @@
-<%= render partial: "#{@match.category.downcase.gsub(' ', '_')}", locals: { match: @match } %>
+<%#= render partial: "#{@match.category.downcase.gsub(' ', '_')}", locals: { match: @match } %>
+<%= render 'matches/shared/mens_doubles' %>
+<%= render 'matches/shared/womens_doubles' %>
+<%= render 'matches/shared/mixed_doubles' %>
+<%= render 'matches/shared/mens_singles' %>
+<%= render 'matches/shared/womens_singles' %>

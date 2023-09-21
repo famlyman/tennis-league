@@ -20,8 +20,19 @@
   </p>
 
 </div>
-<%= render 'matches/shared/mens_doubles' %>
-<%= render 'matches/shared/womens_doubles' %>
-<%= render 'matches/shared/mixed_doubles' %>
-<%= render 'matches/shared/mens_singles' %>
-<%= render 'matches/shared/womens_singles' %>
+<h3>Match Details</h3>
+<p><%= match.home_team.name %>  <%= match.home_team_score %></p>
+<p><%= match.away_team.name %>  <%= match.away_team_score %></p>
+
+<% case match.match_type %>
+  <% when 'mens_doubles' %>
+    <%= render 'matches/shared/mens_doubles', match: @match %>
+  <% when 'womens_doubles' %>
+    <%= render 'matches/shared/womens_doubles', match: @match %>
+  <% when 'mixed_doubles' %>
+    <%= render 'matches/shared/mixed_doubles', match: @match %>
+  <% when 'mens_singles' %>
+    <%= render 'matches/shared/mens_singles', match: @match %>
+  <% when 'womens_singles' %>
+    <%= render 'matches/shared/womens_singles', match: @match %>
+<% end %>

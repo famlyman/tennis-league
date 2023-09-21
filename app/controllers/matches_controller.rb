@@ -61,13 +61,23 @@ class MatchesController < ApplicationController
   def mens_doubles
     # Assuming params[:match] contains the set scores
     set_match_scores(params[:match])
+    
+    # Assuming you have a method that calculates the winner of an individual match
+    winner = calculate_winner(params[:match][:mens_doubles_set1_score], params[:match][:mens_doubles_set2_score], params[:match][:mens_doubles_set3_score])
+  
+    # Update the home team score based on the winner
+    if winner == :home
+      @match.home_team_score += 1
+    elsif winner == :away
+      @match.away_team_score += 1
+    end
   
     respond_to do |format|
       if @match.save
         format.html { redirect_to match_url(@match), notice: "Match was successfully created." }
         format.json { render :show, status: :created, location: @match }
       else
-        format.html { render :show, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @match.errors, status: :unprocessable_entity }
       end
     end
@@ -75,13 +85,23 @@ class MatchesController < ApplicationController
 
   def womens_doubles
     set_match_scores(params[:match])
+    
+    # Assuming you have a method that calculates the winner of an individual match
+    winner = calculate_winner(params[:match][:womens_doubles_set1_score], params[:match][:womens_doubles_set2_score], params[:match][:womens_doubles_set3_score])
+  
+    # Update the home team score based on the winner
+    if winner == :home
+      @match.home_team_score += 1
+    elsif winner == :away
+      @match.away_team_score += 1
+    end
   
     respond_to do |format|
       if @match.save
         format.html { redirect_to match_url(@match), notice: "Match was successfully created." }
         format.json { render :show, status: :created, location: @match }
       else
-        format.html { render :show, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @match.errors, status: :unprocessable_entity }
       end
     end
@@ -89,13 +109,23 @@ class MatchesController < ApplicationController
 
   def mixed_doubles
     set_match_scores(params[:match])
+    
+    # Assuming you have a method that calculates the winner of an individual match
+    winner = calculate_winner(params[:match][:mixed_doubles_set1_score], params[:match][:mixed_doubles_set2_score], params[:match][:mixed_doubles_set3_score])
+  
+    # Update the home team score based on the winner
+    if winner == :home
+      @match.home_team_score += 1
+    elsif winner == :away
+      @match.away_team_score += 1
+    end
   
     respond_to do |format|
       if @match.save
         format.html { redirect_to match_url(@match), notice: "Match was successfully created." }
         format.json { render :show, status: :created, location: @match }
       else
-        format.html { render :show, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @match.errors, status: :unprocessable_entity }
       end
     end
@@ -103,13 +133,23 @@ class MatchesController < ApplicationController
 
   def mens_singles
     set_match_scores(params[:match])
+    
+    # Assuming you have a method that calculates the winner of an individual match
+    winner = calculate_winner(params[:match][:mens_singles_set1_score], params[:match][:mens_singles_set2_score], params[:match][:mens_singles_set3_score])
+  
+    # Update the home team score based on the winner
+    if winner == :home
+      @match.home_team_score += 1
+    elsif winner == :away
+      @match.away_team_score += 1
+    end
   
     respond_to do |format|
       if @match.save
         format.html { redirect_to match_url(@match), notice: "Match was successfully created." }
         format.json { render :show, status: :created, location: @match }
       else
-        format.html { render :show, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @match.errors, status: :unprocessable_entity }
       end
     end
@@ -117,13 +157,23 @@ class MatchesController < ApplicationController
 
   def womens_singles
     set_match_scores(params[:match])
+    
+    # Assuming you have a method that calculates the winner of an individual match
+    winner = calculate_winner(params[:match][:womens_singles_set1_score], params[:match][:womens_singles_set2_score], params[:match][:womens_singles_set3_score])
+  
+    # Update the home team score based on the winner
+    if winner == :home
+      @match.home_team_score += 1
+    elsif winner == :away
+      @match.away_team_score += 1
+    end
   
     respond_to do |format|
       if @match.save
         format.html { redirect_to match_url(@match), notice: "Match was successfully created." }
         format.json { render :show, status: :created, location: @match }
       else
-        format.html { render :show, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @match.errors, status: :unprocessable_entity }
       end
     end
@@ -161,10 +211,18 @@ class MatchesController < ApplicationController
         'home_mens_doubles_set1_score', 'away_mens_doubles_set1_score',
         'home_mens_doubles_set2_score', 'away_mens_doubles_set2_score',
         'home_mens_doubles_set3_score', 'away_mens_doubles_set3_score',
-        'womens_doubles_set1_score', 'womens_doubles_set2_score', 'womens_doubles_set3_score',
-        'mixed_doubles_set1_score', 'mixed_doubles_set2_score', 'mixed_doubles_set3_score',
-        'mens_singles_set1_score', 'mens_singles_set2_score', 'mens_singles_set3_score',
-        'womens_singles_set1_score', 'womens_singles_set2_score', 'womens_singles_set3_score'
+        'home_womens_doubles_set1_score', 'away_womens_doubles_set1_score',
+        'home_womens_doubles_set2_score', 'away_womens_doubles_set2_score',
+        'home_womens_doubles_set3_score', 'away_womens_doubles_set3_score',
+        'home_mixed_doubles_set1_score', 'away_mixed_doubles_set1_score',
+        'home_mixed_doubles_set2_score', 'away_mixed_doubles_set2_score',
+        'home_mixed_doubles_set3_score', 'away_mixed_doubles_set3_score',
+        'home_mens_singles_set1_score', 'away_mens_singles_set1_score',
+        'home_mens_singles_set2_score', 'away_mens_singles_set2_score',
+        'home_mens_singles_set3_score', 'away_mens_singles_set3_score',
+        'home_womens_singles_set1_score', 'away_womens_singles_set1_score',
+        'home_womens_singles_set2_score', 'away_womens_singles_set2_score',
+        'home_womens_singles_set3_score', 'away_womens_singles_set3_score'
       ]
     
       set_keys.each do |set_key|
@@ -194,6 +252,19 @@ class MatchesController < ApplicationController
         return 0
       end
     end
+
+    def calculate_winner(set1_score, set2_score, set3_score)
+      if set1_score > set2_score && set1_score > set3_score
+        return @match.home_team.name
+      elsif set2_score > set1_score && set2_score > set3_score
+        return @match.away_team.name
+      elsif set3_score > set1_score && set3_score > set2_score
+        return "Draw"  # You can customize this message for a draw
+      else
+        return "Invalid"  # Handle any other cases
+      end
+    end
+    
 
     # Only allow a list of trusted parameters through.
     def match_params

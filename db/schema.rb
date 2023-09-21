@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_185322) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_163320) do
   create_table "individual_matches", force: :cascade do |t|
     t.string "category"
     t.integer "winner"
@@ -71,6 +71,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_185322) do
     t.index ["team_id", "player_id"], name: "index_players_teams_on_team_id_and_player_id"
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.integer "season_id", null: false
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_scores_on_season_id"
+    t.index ["team_id"], name: "index_scores_on_team_id"
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -87,4 +97,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_185322) do
   end
 
   add_foreign_key "individual_matches", "matches"
+  add_foreign_key "scores", "seasons"
+  add_foreign_key "scores", "teams"
 end
