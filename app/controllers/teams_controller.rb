@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: %i[ show edit update destroy ]
+  before_action :set_team, only: %i[ show edit update destroy join leave]
 
   # GET /teams or /teams.json
   def index
@@ -22,6 +22,14 @@ class TeamsController < ApplicationController
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
+
+    season_id = params[:team][:season].to_i
+
+    if season_id != 0
+      @team.season = Season.find(season_id)
+    else
+      @team.season = nil
+    end
 
     respond_to do |format|
       if @team.save
@@ -57,6 +65,16 @@ class TeamsController < ApplicationController
     end
   end
 
+  def join 
+    @team.players << current_player
+    redirect_to team_url(@team), notice: "You have joined this team."
+  end
+
+  def leave 
+    @team.players.delete(current_player)
+    redirect_to team_url(@team), notice: "You have left this team."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
@@ -65,6 +83,6 @@ class TeamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def team_params
-      params.require(:team).permit(:name, :facility)
+      params.require(:team).permit(:name, :facility, :season_id)
     end
 end

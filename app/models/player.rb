@@ -4,6 +4,8 @@ class Player < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_and_belongs_to_many :teams
+
   enum role: [:player, :captain, :admin]
   after_initialize :set_default_role, if: :new_record?
 

@@ -10,14 +10,14 @@ Rails.application.routes.draw do
   end
   resources :leagues
   resources :seasons
-  resources :teams
+  resources :teams do
+    post 'join', on: :member
+    delete 'leave', on: :member
+  end
   root 'pages#home'
   devise_for :players, controllers: {
     sessions: 'players/sessions',
     registrations: 'players/registrations'
   }
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+ 
 end

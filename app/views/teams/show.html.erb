@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @team %>
+<% if @team.players.include?(current_player) %>
+    <%= button_to 'Leave', leave_team_path(@team), method: :delete %>
+  <% else %>
+    <%= button_to 'Join', join_team_path(@team), method: :post %>
+  <% end %>
+    <h3>Player</h3>
+  <ul>
+    <% @team.players.each do |player| %>
+      <li><%= player.name %></li>
+    <% end %>
+  </ul>
+  
+  
 
 <div>
-  <%= link_to "Edit this team", edit_team_path(@team) %> |
-  <%= link_to "Back to teams", teams_path %>
-
-  <%= button_to "Destroy this team", @team, method: :delete %>
+  <%= link_to "Back to teams", teams_path, class:"btn btn-sm btn-success" %>
+<% if current_player&.admin? %>
+  <%= link_to "Edit this team", edit_team_path(@team), class:"btn btn-sm btn-info" %> 
+  <%= button_to "Destroy this team", @team, method: :delete, class:"btn btn-sm btn-danger" %>
+<% end %>
 </div>

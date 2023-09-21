@@ -4,6 +4,7 @@ class MatchesController < ApplicationController
   # GET /matches or /matches.json
   def index
     @matches = Match.all
+    
   end
 
   # GET /matches/1 or /matches/1.json
@@ -14,15 +15,18 @@ class MatchesController < ApplicationController
   # GET /matches/new
   def new
     @match = Match.new
+    @season = Season.find(params[:season_id])
   end
 
   # GET /matches/1/edit
   def edit
+    @season = Season.find(params[:season_id])
   end
 
   # POST /matches or /matches.json
   def create
     @match = Match.new(match_params)
+    @season = Season.find(params[:season_id])
 
     respond_to do |format|
       if @match.save
@@ -37,6 +41,8 @@ class MatchesController < ApplicationController
 
   # PATCH/PUT /matches/1 or /matches/1.json
   def update
+    @season = Season.find(params[:season_id])
+
     respond_to do |format|
       if @match.update(match_params)
         format.html { redirect_to match_url(@match), notice: "Match was successfully updated." }
