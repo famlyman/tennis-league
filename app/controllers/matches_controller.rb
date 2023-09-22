@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-  before_action :set_match, only: %i[ show edit update destroy mens_doubles womens_doubles mixed_doubles mens_singles womens_singles ]
+  before_action :set_match, only: %i[ show edit update destroy mens_doubles womens_doubles mixed_doubles mens_singles womens_singles update_scores ]
 
   # GET /matches or /matches.json
   def index
@@ -15,18 +15,19 @@ class MatchesController < ApplicationController
   # GET /matches/new
   def new
     @match = Match.new
-    @season = Season.find(params[:season_id])
+    
   end
 
   # GET /matches/1/edit
   def edit
-    @season = Season.find(params[:season_id])
+    @match = Match.find(params[:id])
+    
   end
 
   # POST /matches or /matches.json
   def create
     @match = Match.new(match_params)
-    @season = Season.find(params[:season_id])
+   
 
     respond_to do |format|
       if @match.save
@@ -41,7 +42,7 @@ class MatchesController < ApplicationController
 
   # PATCH/PUT /matches/1 or /matches/1.json
   def update
-    @season = Season.find(params[:season_id])
+ 
 
     respond_to do |format|
       if @match.update(match_params)
@@ -260,16 +261,18 @@ class MatchesController < ApplicationController
     end
 
     def calculate_winner(set1_score, set2_score, set3_score)
-      if set1_score > set2_score && set1_score > set3_score
-        return @match.home_team.name
-      elsif set2_score > set1_score && set2_score > set3_score
-        return @match.away_team.name
-      elsif set3_score > set1_score && set3_score > set2_score
-        return "Draw"  # You can customize this message for a draw
+      if set1_score.nil? || set2_score.nil? || set3_score.nil?
+        return nil
+      elsif set1_score >= set2_score && set1_score >= set3_score
+        return "set1"
+      elsif set2_score >= set1_score && set2_score >= set3_score
+        return "set2"
       else
-        return "Invalid"  # Handle any other cases
+        return "set3"
       end
     end
+    
+    
     
 
     # Only allow a list of trusted parameters through.

@@ -1,5 +1,6 @@
 <h3>Men's Doubles</h3>
 <%= form_with(model: @match, url: mens_doubles_matches_path, method: :post) do |f| %>
+  <%= hidden_field_tag :id, @match.id %>
   <table class="table">
      <thead>
       <tr>
